@@ -12,7 +12,7 @@ Battleship game for the terminal, written in Java. The player manually places th
 From the project root:
 
 ```bash
-mvn clean package
+mvn clean install
 java -jar target/battleship-octubre-*-jar-with-dependencies.jar
 ```
 
