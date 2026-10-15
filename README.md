@@ -5,7 +5,7 @@ Battleship game for the terminal, written in Java. The player manually places th
 ## Requirements
 
 - Java 8 or later
-- Maven
+- Maven 3.6.3 or later
 
 ## Build and run
 
@@ -15,6 +15,8 @@ From the project root:
 mvn clean package
 java -jar target/battleship-octubre-*-jar-with-dependencies.jar
 ```
+
+The build creates a single executable JAR named `battleship-octubre-<timestamp>-jar-with-dependencies.jar`. The timestamp format is `yyyyMMdd-HHmmss`.
 
 During startup, enter each ship's coordinates when prompted. Then enter one coordinate per turn, using a column letter and a row number, for example `A3`.
 

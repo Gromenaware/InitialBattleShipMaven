@@ -17,13 +17,19 @@
         <maven.build.timestamp.format>yyyyMMdd-HHmmss</maven.build.timestamp.format>
     </properties>
     <build>
-        <finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}</finalName>
+        <finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}-jar-with-dependencies</finalName>
         <plugins>
             <plugin>
                 <!-- Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.5.1</version>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
                 <configuration>
                     <archive>
                         <manifest>
@@ -51,9 +57,30 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <inlineDescriptors>
+                        <inlineDescriptor>
+                            <id>jar-with-dependencies</id>
+                            <formats>
+                                <format>jar</format>
+                            </formats>
+                            <includeBaseDirectory>false</includeBaseDirectory>
+                            <fileSets>
+                                <fileSet>
+                                    <directory>${project.build.outputDirectory}</directory>
+                                    <outputDirectory>/</outputDirectory>
+                                </fileSet>
+                            </fileSets>
+                            <dependencySets>
+                                <dependencySet>
+                                    <outputDirectory>/</outputDirectory>
+                                    <useProjectArtifact>false</useProjectArtifact>
+                                    <unpack>true</unpack>
+                                    <scope>runtime</scope>
+                                </dependencySet>
+                            </dependencySets>
+                        </inlineDescriptor>
+                    </inlineDescriptors>
                     <archive>
                         <manifest>
                             <!-- Jar file entry point -->
