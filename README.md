@@ -49,3 +49,14 @@ This is an initial implementation: the enemy fleet is defined in the code, the c
 - `src/main/java/org/scrum/psd/battleship/ascii`: application entry point and terminal interface.
 - `src/main/java/org/scrum/psd/battleship/controller`: game logic and ship/position models.
 - `src/test/java`: unit, end-to-end, and Cucumber BDD tests.
+
+## License and Support
+
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/) Published by [Agile611](http://www.agile611.com/) under the **Creative Commons Attribution-NonCommercial 4.0 International** license.
+
+README written by [Guillem Hernández Sola](https://www.linkedin.com/in/guillemhs/).
+
+## Contact
+
+- 🌐 [agile611.com](http://www.agile611.com/)
+- 📍 Carrer Laureà Miró 309, 08950 Esplugues de Llobregat (Barcelona)
