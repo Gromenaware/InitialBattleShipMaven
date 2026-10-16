@@ -1,0 +1,52 @@
+pipeline {
+    agent none
+
+    tools {
+        maven 'mvn3.10.0'
+    }
+
+    parameters {
+        choice(
+            name: 'AGENT_LABEL',
+            choices: ['alpine', 'debian-13', 'ubuntu-26-04'],
+            description: 'Selecciona la etiqueta del agente'
+        )
+    }
+
+    stages {
+        stage('Ejecución en Agente Seleccionado') {
+            agent {
+                node {
+                    label params.AGENT_LABEL
+                }
+            }
+            
+            stages {
+                stage('Checkout SCM') {
+                    steps {
+                        echo 'Checkout SCM'
+                        git branch: 'master', url: 'https://github.com/Gromenaware/InitialBattleShipMaven.git'
+                    }
+                }
+                
+                stage('Build') {
+                    steps {
+                        echo 'Build'
+                        sh 'mvn clean install'
+                    }
+                }
+            }
+
+            post {
+                always {
+                    echo 'Recopilo tests'
+                    junit 'target/surefire-reports/*.xml'
+                }
+                success {
+                    echo 'Archivo JAR'
+                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true, followSymlinks: false, onlyIfSuccessful: true
+                }
+            }
+        }
+    }
+}
